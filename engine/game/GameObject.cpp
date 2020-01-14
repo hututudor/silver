@@ -1,6 +1,7 @@
 #include "GameObject.h"
 
 GameObject::GameObject() {
+
 }
 
 GameObject::~GameObject() {
@@ -9,10 +10,10 @@ GameObject::~GameObject() {
 void GameObject::onStart() {
 }
 
-void GameObject::onUpdate() {
+void GameObject::onUpdate(const float& dt) {
 }
 
-void GameObject::onRender() {
+void GameObject::onRender(sf::RenderWindow *window) {
 }
 
 void GameObject::onDestroy() {

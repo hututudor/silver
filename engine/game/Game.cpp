@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Game.h"
 
-Game::Game(const int &windowStyle) {
-  window = new sf::RenderWindow(sf::VideoMode(1280, 720), "Silver window", windowStyle);
+Game::Game(Vector2i size, const int &windowStyle) {
+  window = new sf::RenderWindow(sf::VideoMode(size.x, size.y), "Silver window", windowStyle);
 }
 
 Game::~Game() {
@@ -20,7 +20,12 @@ void Game::start(const std::string &sceneName) {
 
   currentScene->onStart();
 
+  sf::Clock clock;
+  sf::Time dt;
+
   while (window->isOpen()) {
+    dt = clock.restart();
+
     sf::Event event{};
     while (window->pollEvent(event)) {
       handleEvents(event);
@@ -34,11 +39,10 @@ void Game::start(const std::string &sceneName) {
       *wantsToChangeScene = std::string();
     }
 
+    currentScene->onUpdate(dt.asSeconds());
+
     window->clear(sf::Color::Black);
-
-    currentScene->onUpdate();
-    currentScene->onRender();
-
+    currentScene->onRender(window);
     window->display();
   }
 }

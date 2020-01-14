@@ -26,12 +26,12 @@ private:
   void handleEvents(sf::Event event);
 
 public:
-  explicit Game(const int &windowStyle = WindowStyle::Default);
+  explicit Game(Vector2i size = Vector2i(800, 600), const int &windowStyle = WindowStyle::Default);
   ~Game();
 
   void start(const std::string &sceneName);
   void stop();
-  void changeScene(std::string* sceneName);
+  void changeScene(std::string *sceneName);
   GameState getState();
 
   void setWindowTitle(const std::string &title);

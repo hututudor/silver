@@ -15,6 +15,11 @@ public:
     this->y = y;
   };
 
+  Vector2(T xy) {
+    this->x = xy;
+    this->y = xy;
+  }
+
   static Vector2<T> fromSfVector(sf::Vector2<T> v) {
     return Vector2<T>(v.x, v.y);
   }

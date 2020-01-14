@@ -2,31 +2,31 @@
 #include <iostream>
 
 class DefaultScene : public Scene {
-public:
-  explicit DefaultScene(GameState gs) : Scene(gs) {}
+private:
+  Text *text;
 
-  void onStart() override {
-    std::cout << "fs" << std::endl;
-    this->changeState("second");
+public:
+  explicit DefaultScene(GameState gs) : Scene(gs) {
+    ResourceManager::loadFont("arial", "../res/fonts/Arial.ttf");
+    text = new Text(ResourceManager::fonts["arial"], "test", 24);
+    text->setColor(Color(0, 255, 0, 255));
   }
-};
 
-class SecondScene : public Scene {
-public:
-  explicit SecondScene(GameState gs) : Scene(gs) {}
+  void onUpdate(const float &dt) override {
+    float speed = 100;
+    text->position = text->position + Vector2u(speed * dt, speed * dt);
 
-  void onStart() override {
-    std::cout << "ss";
+    clearGameObjects();
+    addGameObject(text);
+    Scene::onUpdate(dt);
   }
 };
 
 int main() {
-  Game game;
+  Game game(Vector2i(800, 600));
 
   game.addScene("default", new DefaultScene(game.getState()));
-  game.addScene("second", new SecondScene(game.getState()));
-  game.setWindowSize(Vector2u(800, 600));
-//  game.setWindowPosition(Vector2i(100, 100));
+  game.setVSync(true);
 
   game.start("default");
 }

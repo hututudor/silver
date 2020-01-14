@@ -8,26 +8,26 @@ Scene::~Scene() {
 }
 
 void Scene::onStart() {
-  for(auto &it: gameObjects) {
-    it.second->onStart();
+  for (auto &it: gameObjects) {
+    it->onStart();
   }
 }
 
-void Scene::onUpdate() {
-  for(auto &it: gameObjects) {
-    it.second->onUpdate();
+void Scene::onUpdate(const float &dt) {
+  for (auto &it: gameObjects) {
+    it->onUpdate(dt);
   }
 }
 
-void Scene::onRender() {
-  for(auto &it: gameObjects) {
-    it.second->onRender();
+void Scene::onRender(sf::RenderWindow *window) {
+  for (auto &it: gameObjects) {
+    it->onRender(window);
   }
 }
 
 void Scene::onDestroy() {
-  for(auto &it: gameObjects) {
-    it.second->onDestroy();
+  for (auto &it: gameObjects) {
+    it->onDestroy();
   }
 }
 
@@ -35,6 +35,12 @@ void Scene::changeState(std::string stateName) {
   *wantsToChangeScene = stateName;
 }
 
-void Scene::addGameObject(const std::string &name, GameObject &gameObject) {
-  gameObjects[name] = &gameObject;
+void Scene::addGameObject(GameObject *gameObject) {
+  gameObjects.push_back(gameObject);
 }
+
+void Scene::clearGameObjects() {
+  gameObjects.clear();
+}
+
+
