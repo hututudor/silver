@@ -12,8 +12,8 @@ public:
   }
 
   void onStart() override {
-    for (int i = 0; i < 1000000; i++) {
-      Rect *rect = new Rect(Vector2f(1, 1));
+    for (int i = 0; i < 1000; i++) {
+      Rect *rect = new Rect(Vector2f(5, 5));
       rects.push_back(rect);
     }
   }
@@ -27,9 +27,9 @@ public:
   void onUpdate(const float &dt) override {
     std::cout << "FPS: " << 1 / dt << std::endl;
 
-//    for (auto &it : rects) {
-//      it->position = Vector2f(randInt(0, 1920), randInt(0, 1080));
-//    }
+    for (auto &it : rects) {
+      it->position = Vector2f(randInt(0, 1920), randInt(0, 1080));
+    }
 
     clearGameObjects();
     for (auto &it : rects) {

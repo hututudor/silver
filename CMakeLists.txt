@@ -3,7 +3,7 @@ project(silver)
 
 set(CMAKE_CXX_STANDARD 14)
 
-link_directories(deps/sfml/lib)
+add_subdirectory(deps/sfml)
 include_directories(deps/sfml/include)
 
 include_directories(engine)
