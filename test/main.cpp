@@ -18,9 +18,12 @@ public:
     button->position = Vector2f(300, 300);
   }
 
-  void onUpdate(const float &dt) override {
-    rect->visible = button->isClicked();
+  void onStart() override {
+    ResourceManager::loadAudio("bg", "../res/music/piano.wav");
+    ResourceManager::audios["bg"]->play();
+  }
 
+  void onUpdate(const float &dt) override {
     clearGameObjects();
     addGameObject(button);
     addGameObject(rect);

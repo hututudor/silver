@@ -2,6 +2,13 @@
 
 std::map<std::string, sf::Texture *> ResourceManager::textures;
 std::map<std::string, sf::Font *> ResourceManager::fonts;
+std::map<std::string, sf::Music *> ResourceManager::audios;
+
+void ResourceManager::free() {
+  freeTextures();
+  freeFonts();
+  freeAudios();
+}
 
 void ResourceManager::loadTexture(const std::string &name, const std::string &fileName, bool smooth) {
   textures[name] = new sf::Texture;
@@ -33,8 +40,18 @@ void ResourceManager::freeFonts() {
   }
 }
 
+void ResourceManager::loadAudio(const std::string &name, const std::string &fileName) {
+  audios[name] = new sf::Music();
 
-void ResourceManager::free() {
-  freeTextures();
+  if(!audios[name]->openFromFile(fileName)) {
+    std::cout << "Error loading audio " << name << " from " << fileName << std::endl;
+  }
+}
+
+void ResourceManager::freeAudios() {
+  for (auto &it: audios) {
+    delete it.second;
+  }
+
 }
 
