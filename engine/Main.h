@@ -12,3 +12,6 @@
 #include "managers/ResourceManager.h"
 
 #include "graphics/Text.h"
+#include "graphics/Rect.h"
+
+#include "gui/Button.h"

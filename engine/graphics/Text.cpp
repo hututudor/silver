@@ -5,7 +5,6 @@ Text::Text(const sf::Font *font, const std::string &str, unsigned int size) {
   text.setFont(*font);
   setString(str);
   setCharacterSize(size);
-  setPosition(Vector2u(10, 10));
 }
 
 Text::~Text() {
@@ -13,10 +12,6 @@ Text::~Text() {
 
 void Text::setCharacterSize(const unsigned int size) {
   text.setCharacterSize(size);
-}
-
-void Text::setPosition(Vector2u position) {
-  text.setPosition(position.x, position.y);
 }
 
 void Text::setString(const std::string &str) {
@@ -32,3 +27,24 @@ void Text::onRender(sf::RenderWindow *window) {
   text.setRotation(rotation);
   window->draw(text);
 }
+
+unsigned int Text::getCharacterSize() {
+  return text.getCharacterSize();
+}
+
+std::string Text::getString() {
+  return text.getString().toAnsiString();
+}
+
+Color Text::getColor() {
+  return Color::fromSfColor(text.getFillColor());
+}
+
+Vector2f Text::getOutBoundsSize() {
+  return Vector2f(text.getLocalBounds().width, text.getGlobalBounds().height);
+}
+
+Vector2f Text::getOutBoundsPosition() {
+  return Vector2f(text.getLocalBounds().top, text.getGlobalBounds().left);
+}
+

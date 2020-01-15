@@ -5,12 +5,16 @@
 
 class GameObject {
 public:
-  Vector2u position;
-  Vector2u scale;
+  Vector2f position;
+  Vector2f size;
   float rotation;
+
+  bool visible;
 
   GameObject();
   ~GameObject();
+
+  Vector2f getCenterPosition();
 
   virtual void onStart();
   virtual void onUpdate(const float &dt);

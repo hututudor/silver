@@ -5,6 +5,8 @@
 #include <map>
 
 #include "../math/Vector2.h"
+#include "../math/Color.h"
+#include "../managers/Mouse.h"
 #include "Scene.h"
 
 enum WindowStyle {
@@ -24,9 +26,13 @@ private:
   std::string *wantsToChangeScene;
 
   void handleEvents(sf::Event event);
+  void handleMousePressedEvent(sf::Mouse::Button button);
+  void handleMouseReleaseEvent(sf::Mouse::Button button);
+  void initMouse();
 
 public:
-  explicit Game(Vector2i size = Vector2i(800, 600), const int &windowStyle = WindowStyle::Default);
+  explicit Game(Vector2i size = Vector2i(800, 600), int antialiasingLevel = 0,
+    const int &windowStyle = WindowStyle::Default);
   ~Game();
 
   void start(const std::string &sceneName);

@@ -1,8 +1,21 @@
 #include <iostream>
 #include "Game.h"
 
-Game::Game(Vector2i size, const int &windowStyle) {
-  window = new sf::RenderWindow(sf::VideoMode(size.x, size.y), "Silver window", windowStyle);
+Game::Game(Vector2i size, const int antialiasingLevel, const int &windowStyle) {
+  sf::ContextSettings settings;
+  settings.antialiasingLevel = antialiasingLevel;
+
+  window = new sf::RenderWindow(sf::VideoMode(size.x, size.y), "Silver window", windowStyle, settings);
+
+  initMouse();
+}
+
+void Game::initMouse() {
+  Mouse::releaseButton("right");
+  Mouse::releaseButton("left");
+  Mouse::releaseButton("middle");
+  Mouse::releaseButton("extra1");
+  Mouse::releaseButton("extra2");
 }
 
 Game::~Game() {
@@ -10,8 +23,47 @@ Game::~Game() {
 }
 
 void Game::handleEvents(sf::Event event) {
-  if (event.type == sf::Event::Closed)
+  if (event.type == sf::Event::Closed) {
     window->close();
+  } else if (event.type == sf::Event::Resized) {
+    window->setSize(Vector2u(event.size.width, event.size.height).toSfVector());
+  } else if (event.type == sf::Event::TextEntered) {
+    // Todo: Handle text entered event
+  } else if (event.type == sf::Event::MouseButtonPressed) {
+    handleMousePressedEvent(event.mouseButton.button);
+  } else if (event.type == sf::Event::MouseButtonReleased) {
+    handleMouseReleaseEvent(event.mouseButton.button);
+  } else if (event.type == sf::Event::MouseMoved) {
+    Mouse::setPosition(Vector2f(event.mouseMove.x, event.mouseMove.y));
+  }
+}
+
+void Game::handleMousePressedEvent(sf::Mouse::Button button) {
+  if (button == sf::Mouse::Right) {
+    Mouse::pressButton("right");
+  } else if (button == sf::Mouse::Left) {
+    Mouse::pressButton("left");
+  } else if (button == sf::Mouse::Middle) {
+    Mouse::pressButton("middle");
+  } else if (button == sf::Mouse::XButton1) {
+    Mouse::pressButton("extra1");
+  } else if (button == sf::Mouse::XButton2) {
+    Mouse::pressButton("extra2");
+  }
+}
+
+void Game::handleMouseReleaseEvent(sf::Mouse::Button button) {
+  if (button == sf::Mouse::Right) {
+    Mouse::releaseButton("right");
+  } else if (button == sf::Mouse::Left) {
+    Mouse::releaseButton("left");
+  } else if (button == sf::Mouse::Middle) {
+    Mouse::releaseButton("middle");
+  } else if (button == sf::Mouse::XButton1) {
+    Mouse::releaseButton("extra1");
+  } else if (button == sf::Mouse::XButton2) {
+    Mouse::releaseButton("extra2");
+  }
 }
 
 void Game::start(const std::string &sceneName) {
@@ -41,7 +93,7 @@ void Game::start(const std::string &sceneName) {
 
     currentScene->onUpdate(dt.asSeconds());
 
-    window->clear(sf::Color::Black);
+    window->clear(Color(0, 0, 0, 255).toSfColor());
     currentScene->onRender(window);
     window->display();
   }

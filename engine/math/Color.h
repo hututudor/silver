@@ -18,7 +18,7 @@ public:
     return sf::Color(r, g, b, a);
   }
 
-  static Color fromSfColor(sf::Color &color) {
+  static Color fromSfColor(sf::Color color) {
     return Color(color.r, color.g, color.b, color.a);
   }
 

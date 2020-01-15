@@ -21,7 +21,8 @@ void Scene::onUpdate(const float &dt) {
 
 void Scene::onRender(sf::RenderWindow *window) {
   for (auto &it: gameObjects) {
-    it->onRender(window);
+    if (it->visible)
+      it->onRender(window);
   }
 }
 

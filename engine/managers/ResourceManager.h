@@ -9,7 +9,7 @@ public:
   static std::map<std::string, sf::Texture *> textures;
   static std::map<std::string, sf::Font *> fonts;
 
-  static void loadTexture(const std::string &name, const std::string &fileName);
+  static void loadTexture(const std::string &name, const std::string &fileName, bool smooth = false);
   static void freeTextures();
 
   static void loadFont(const std::string &name, const std::string &fileName);

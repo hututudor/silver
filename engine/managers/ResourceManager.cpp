@@ -3,12 +3,14 @@
 std::map<std::string, sf::Texture *> ResourceManager::textures;
 std::map<std::string, sf::Font *> ResourceManager::fonts;
 
-void ResourceManager::loadTexture(const std::string &name, const std::string &fileName) {
+void ResourceManager::loadTexture(const std::string &name, const std::string &fileName, bool smooth) {
   textures[name] = new sf::Texture;
 
   if (!textures[name]->loadFromFile(fileName)) {
     std::cout << "Error loading texture " << name << " from " << fileName << std::endl;
   }
+
+  textures[name]->setSmooth(smooth);
 }
 
 void ResourceManager::freeTextures() {

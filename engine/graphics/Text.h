@@ -14,9 +14,14 @@ public:
   ~Text();
 
   void setCharacterSize(unsigned int size);
-  void setPosition(Vector2u position);
   void setString(const std::string &str);
   void setColor(Color color);
+
+  unsigned int getCharacterSize();
+  std::string getString();
+  Color getColor();
+  Vector2f getOutBoundsPosition();
+  Vector2f getOutBoundsSize();
 
   void onRender(sf::RenderWindow *window) override;
 };
