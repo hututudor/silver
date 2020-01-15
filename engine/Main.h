@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Macros.h"
+#include "utils/utils.h"
 
 #include "math/Vector2.h"
 #include "math/Color.h"

@@ -3,30 +3,38 @@
 
 class DefaultScene : public Scene {
 private:
-  Rect *rect;
-  Button *button;
+  std::vector<Rect *> rects;
 
 public:
   explicit DefaultScene(GameState gs) : Scene(gs) {
-    ResourceManager::loadFont("arial", "../res/fonts/Arial.ttf");
-    ResourceManager::loadTexture("player_idle", "../res/textures/player/player_idle.png");
-
-    rect = new Rect(Vector2f(2 * 80, 2 * 110));
-    rect->position = Vector2f(100, 0);
-    rect->setTexture(ResourceManager::textures["player_idle"]);
-    button = new Button(Vector2f(150, 50), "SHOW", ResourceManager::fonts["arial"]);
-    button->position = Vector2f(300, 300);
+//    ResourceManager::loadFont("arial", "../res/fonts/Arial.ttf");
+//    ResourceManager::loadTexture("player_idle", "../res/textures/player/player_idle.png");
   }
 
   void onStart() override {
-    ResourceManager::loadAudio("bg", "../res/music/piano.wav");
-    ResourceManager::audios["bg"]->play();
+    for (int i = 0; i < 1000000; i++) {
+      Rect *rect = new Rect(Vector2f(1, 1));
+      rects.push_back(rect);
+    }
+  }
+
+  void onDestroy() override {
+    for (auto &it : rects) {
+      delete it;
+    }
   }
 
   void onUpdate(const float &dt) override {
+    std::cout << "FPS: " << 1 / dt << std::endl;
+
+//    for (auto &it : rects) {
+//      it->position = Vector2f(randInt(0, 1920), randInt(0, 1080));
+//    }
+
     clearGameObjects();
-    addGameObject(button);
-    addGameObject(rect);
+    for (auto &it : rects) {
+      addGameObject(it);
+    }
     Scene::onUpdate(dt);
   }
 };
@@ -35,7 +43,6 @@ int main() {
   Game game(Vector2i(1920, 1080), 8);
 
   game.addScene("default", new DefaultScene(game.getState()));
-  game.setVSync(true);
 
   game.start("default");
   ResourceManager::free();
