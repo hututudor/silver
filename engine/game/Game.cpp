@@ -6,6 +6,7 @@ Game::Game(Vector2i size, const int antialiasingLevel, const int &windowStyle) {
   settings.antialiasingLevel = antialiasingLevel;
 
   window = new sf::RenderWindow(sf::VideoMode(size.x, size.y), "Silver window", windowStyle, settings);
+  window->setKeyRepeatEnabled(false);
 
   initMouse();
 }
@@ -90,7 +91,7 @@ void Game::start(const std::string &sceneName) {
   while (window->isOpen()) {
     dt = clock.restart();
 
-    sf::Event event{};
+    sf::Event event;
     while (window->pollEvent(event)) {
       handleEvents(event);
     }

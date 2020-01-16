@@ -15,8 +15,9 @@ Button::~Button() {
 void Button::onUpdate(const float &dt) {
   this->rect->position = position;
   this->rect->size = size;
-  this->text->position = this->rect->position + Vector2f(this->rect->size.x / 2.0f - this->text->getOutBoundsSize().x / 2.0f,
-    this->rect->size.y /  2.0f - this->text->getOutBoundsSize().y /1.15f);
+  this->text->position =
+    this->rect->position + Vector2f(this->rect->size.x / 2.0f - this->text->getOutBoundsSize().x / 2.0f,
+      this->rect->size.y / 2.0f - this->text->getOutBoundsSize().y / modifier);
 
   if (this->rect->includes(Mouse::position)) {
     hover = true;

@@ -16,6 +16,7 @@ public:
   Text *text;
   Rect *rect;
 
+  float modifier = 0.9f;
   Color backgroundColor = Color(255, 1, 1, 255);
   Color hoverBackgroundColor = Color(1, 255, 1, 255);
   Color clickedBackgroundColor = Color(1, 1, 255, 255);
