@@ -35,6 +35,10 @@ void Game::handleEvents(sf::Event event) {
     handleMouseReleaseEvent(event.mouseButton.button);
   } else if (event.type == sf::Event::MouseMoved) {
     Mouse::setPosition(Vector2f(event.mouseMove.x, event.mouseMove.y));
+  } else if(event.type == sf::Event::KeyPressed) {
+    handleKeyboardPressedEvent(event.key.code);
+  } else if(event.type == sf::Event::KeyReleased) {
+    handleKeyboardReleasedEvent(event.key.code);
   }
 }
 
@@ -64,6 +68,14 @@ void Game::handleMouseReleaseEvent(sf::Mouse::Button button) {
   } else if (button == sf::Mouse::XButton2) {
     Mouse::releaseButton("extra2");
   }
+}
+
+void Game::handleKeyboardPressedEvent(sf::Keyboard::Key key) {
+  Keyboard::pressKey(key);
+}
+
+void Game::handleKeyboardReleasedEvent(sf::Keyboard::Key key) {
+  Keyboard::releaseKey(key);
 }
 
 void Game::start(const std::string &sceneName) {

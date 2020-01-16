@@ -7,6 +7,7 @@
 #include "../math/Vector2.h"
 #include "../math/Color.h"
 #include "../managers/Mouse.h"
+#include "../managers/Keyboard.h"
 #include "Scene.h"
 
 enum WindowStyle {
@@ -28,6 +29,8 @@ private:
   void handleEvents(sf::Event event);
   void handleMousePressedEvent(sf::Mouse::Button button);
   void handleMouseReleaseEvent(sf::Mouse::Button button);
+  void handleKeyboardPressedEvent(sf::Keyboard::Key key);
+  void handleKeyboardReleasedEvent(sf::Keyboard::Key key);
   void initMouse();
 
 public:
